@@ -16,14 +16,22 @@ public class brokerServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = -4657686696042031798L;
 	
-	private int timeout = 5000;
+	private int timeout = 0;
 	private Hashtable<String, Consumer> consumers = null;
 	private Broker broker = null;
 
     public void init(ServletConfig config) throws ServletException
     {
         System.out.println("init");
+        timeout = Integer.parseInt(config.getInitParameter("timeout"));
+        String[] topics = config.getInitParameter("topics").split(",");
+        
+        
         broker = new Broker(timeout);
+        for (String topic : topics) {
+        	broker.addQueue(topic);
+        }
+        
         consumers = new Hashtable<String, Consumer>();
         
         broker.addMessage("a", "test1");

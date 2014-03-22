@@ -3,10 +3,22 @@
     <servlet>
         <servlet-name>broker</servlet-name>
         <servlet-class>amartin.HyperQueue.brokerServlet</servlet-class>
+        <init-param>
+        	<param-name>timeout</param-name>
+        	<param-value>5000</param-value>
+        </init-param>
+        <init-param>
+        	<param-name>topics</param-name>
+        	<param-value>a,b,c</param-value>
+        </init-param>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>broker</servlet-name>
         <url-pattern>/broker/*</url-pattern>
     </servlet-mapping>
+    
+    <welcome-file-list>
+   <welcome-file>index.html</welcome-file>
+</welcome-file-list>
 </web-app>
