@@ -1,7 +1,12 @@
 <html>
 <body>
  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <button id=update>update</button>
+ <select id=topic>
+<option value="a">a</option>
+<option value="b">b</option>
+<option value="c">c</option>
+</select>
+    <button id=update>update</button><br>
     <ul id=ulA>
     </ul>
     <script>
@@ -15,18 +20,20 @@
     
     var session = "";
     $("#update").click(function(){
+    	var topic = $("#topic").val();
     	$.ajax({
 		    type: 'GET',
-		    url: 'broker/a',
+		    url: 'broker/'+topic,
 		    headers: {
 		        SESSION:session
 		    },
 		    success: function(res, status, xhr) {
-		    	session = xhr.getResponseHeader("SESSION"); 
-			  	var li = $("<li>").text(res);
-			  	var list = $("#ulA").first();
-			  	console.log(list);
-			  	list.prepend(li);
+		    	session = xhr.getResponseHeader("SESSION");
+		    	if ('' != res) {
+				  	var li = $("<li>").text(res);
+				  	var list = $("#ulA").first();
+				  	list.prepend(li);
+			  	}
 			}
 		});
     });
