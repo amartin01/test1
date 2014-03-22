@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app>
+    <servlet>
+        <servlet-name>broker</servlet-name>
+        <servlet-class>amartin.HyperQueue.brokerServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>broker</servlet-name>
+        <url-pattern>/broker/*</url-pattern>
+    </servlet-mapping>
+</web-app>
