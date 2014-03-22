@@ -1,0 +1,22 @@
+<html>
+<body>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+<select id=topic>
+<option value="a">a</option>
+<option value="b">b</option>
+<option value="c">c</option>
+</select>
+<input type='text' id="message"/>
+
+<button id=postMessage>POST</button>
+<script>
+	$("#postMessage").click(function(){
+		var topic = $("#topic").val();
+    	$.post('broker/'+topic, {"message":$("#message").val()}, function(){
+    		$("#message").val('');
+    	});
+    });
+</script>
+</body>
+</html
