@@ -1,14 +1,16 @@
 <html>
 <body>
- <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
- <select id=topic>
-</select>
-    <button id=topics>Get Topics</button><br><br>
+ <script src="jquery-1.11.0.min.js"></script>
+ <h1>HyperQueue consumer</h1>
+ <h3>Topics</h3>
+ Select topic: <select id=topic></select>
+    <button id=topics>Refresh topics</button><br><br>
+    
+    <h3>Messages for "<span id=topicname></span>"</h3>
     <button id=update>Get message</button><br>
-    <ul id=ulA>
-    </ul>
+    <ul id=ulA></ul>
     <script>
-    $( document ).ready(function() {
+    $(document).ready(function() {
 	    
 	    var session = "";
 	    $("#update").click(function(){
@@ -23,23 +25,30 @@
 			    	session = xhr.getResponseHeader("SESSION");
 			    	if ('' != res) {
 					  	var li = $("<li>").text(res);
-					  	var list = $("#ulA").first();
+					  	var list = $("#ulA");
 					  	list.prepend(li);
 				  	}
 				}
 			});
 	    });
 	    
+	    $('#topic').change(function(){
+	    	$('#topicname').text($("#topic").val());
+	    	$("#ulA").empty();
+	    });
+
 	    $("#topics").click(function(){
 	    	$.getJSON("topics", function( data ) {
 	    		var select = $('#topic');
 	    		select.empty();
 	    		
-	    	for(x in data) {
-	    		var option = $("<option>");
-	    		option.val(data[x]).text(data[x]);
-	    		select.append(option);
-	    	}
+		    	for(x in data) {
+		    		var option = $("<option>");
+		    		option.val(data[x]).text(data[x]);
+		    		select.append(option);
+		    	}
+	    		
+	    		select.change();
 			});
 	    });
 	    
