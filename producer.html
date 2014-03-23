@@ -1,17 +1,18 @@
 <html>
 <body>
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-
-<select id=topic>
-</select>
-<button id=topics>Get Topics</button><br><br>
-
-<input type='text' id="message"/>
-
-<button id=postMessage>Post message</button>
-<p>
+<script src="jquery-1.11.0.min.js"></script>
+<h1>HyperQueue producer</h1>
+<h3>Topics</h3>
 <input type='text' id="newTopic"/>
 <button id=postTopic>Add topic</button>
+
+<h3>Messages</h3>
+Select topic: <select id=topic></select>
+<button id=topics>Refresh topics</button><br><br>
+
+Post message to "<span id=topicname></span>" <input type='text' id="message"/>
+<button id=postMessage>Post message</button>
+<p>
 
 <script>
 	$( document ).ready(function() {
@@ -29,16 +30,22 @@
 	    	});
 	    });
      
+     	$('#topic').change(function(){
+	    	$('#topicname').text($("#topic").val());
+	    });
+	    
      	$("#topics").click(function(){
 	    	$.getJSON("topics", function( data ) {
 	    		var select = $('#topic');
 	    		select.empty();
 	    		
-	    	for(x in data) {
-	    		var option = $("<option>");
-	    		option.val(data[x]).text(data[x]);
-	    		select.append(option);
-	    	}
+		    	for(x in data) {
+		    		var option = $("<option>");
+		    		option.val(data[x]).text(data[x]);
+		    		select.append(option);
+		    	}
+		    	
+		    	$('#topic').change();
 			});
 	    });
 	    
