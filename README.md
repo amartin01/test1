@@ -20,4 +20,17 @@ The default url to the app will be http://localhost:8080/broker
 
 producer.html and consumer.html are available from the homepage
 
+Console hyperqueue client
+==
+a console java client exists: /HQClient
+
+Usage: HQClient [broker url [topic name]]
+
+broker url: full adress of broker server ex: http://localhost:8080/broker/
+topic name: name of topic to fetch messages from
+
+with no parameter: show this usage help
+
+with only the broker url: shows a list of topic available
+
 
