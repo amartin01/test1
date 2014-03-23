@@ -41,8 +41,7 @@ public class MessageQueue {
 			try {
 				list.wait(timeout);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				// do nothing
 			}
 		}
 	}
@@ -53,6 +52,4 @@ public class MessageQueue {
 			list.notifyAll();
 		}
 	}
-	
-	
 }

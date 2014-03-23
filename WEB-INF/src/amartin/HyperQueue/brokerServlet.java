@@ -29,11 +29,7 @@ public class brokerServlet extends HttpServlet {
         	broker.addQueue(topic);
         }
         
-        consumers = new Hashtable<String, Consumer>();
-        
-        broker.addMessage("a", "test1");
-        broker.addMessage("a", "test2");
-        broker.addMessage("a", "test3");        
+        consumers = new Hashtable<String, Consumer>();      
     }
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

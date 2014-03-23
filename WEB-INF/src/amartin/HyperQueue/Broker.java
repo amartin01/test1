@@ -4,11 +4,6 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Map.Entry;
 
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonObject;
-
 public class Broker {
 	private Hashtable<String, MessageQueue> queues;
 	private int timeout = 0;
@@ -32,9 +27,6 @@ public class Broker {
 		if (queues.containsKey(name)) {
 			MessageQueue queue = queues.get(name);
 			queue.add(new Message(message));
-		} else {
-			System.out.println(name);
-			System.out.println(message);
 		}
 	}
 	
