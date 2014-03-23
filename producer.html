@@ -3,20 +3,48 @@
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 
 <select id=topic>
-<option value="a">a</option>
-<option value="b">b</option>
-<option value="c">c</option>
 </select>
+<button id=topics>Get Topics</button><br><br>
+
 <input type='text' id="message"/>
 
-<button id=postMessage>POST</button>
+<button id=postMessage>Post message</button>
+<p>
+<input type='text' id="newTopic"/>
+<button id=postTopic>Add topic</button>
+
 <script>
-	$("#postMessage").click(function(){
-		var topic = $("#topic").val();
-    	$.post('broker/'+topic, {"message":$("#message").val()}, function(){
-    		$("#message").val('');
-    	});
+	$( document ).ready(function() {
+		$("#postMessage").click(function(){
+			var topic = $("#topic").val();
+	    	$.post('messages/'+topic, {"message":$("#message").val()}, function(){
+	    		$("#message").val('');
+	    	});
+	    });
+	    
+		$("#postTopic").click(function(){
+	    	$.post('topics', {"topic":$("#newTopic").val()}, function(){
+	    		$("#newTopic").val('');
+	    		$("#topics").click();
+	    	});
+	    });
+     
+     	$("#topics").click(function(){
+	    	$.getJSON("topics", function( data ) {
+	    		var select = $('#topic');
+	    		select.empty();
+	    		
+	    	for(x in data) {
+	    		var option = $("<option>");
+	    		option.val(data[x]).text(data[x]);
+	    		select.append(option);
+	    	}
+			});
+	    });
+	    
+	    $("#topics").click();
     });
+
 </script>
 </body>
 </html

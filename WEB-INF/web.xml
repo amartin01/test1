@@ -12,10 +12,23 @@
         	<param-value>a,b,c</param-value>
         </init-param>
     </servlet>
+    <servlet>
+        <servlet-name>topics</servlet-name>
+        <servlet-class>amartin.HyperQueue.topicServlet</servlet-class>
+        <init-param>
+        	<param-name>timeout</param-name>
+        	<param-value>5000</param-value>
+        </init-param>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>broker</servlet-name>
-        <url-pattern>/broker/*</url-pattern>
+        <url-pattern>/messages/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>topics</servlet-name>
+        <url-pattern>/topics</url-pattern>
     </servlet-mapping>
     
     <welcome-file-list>

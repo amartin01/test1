@@ -16,18 +16,15 @@ public class brokerServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = -4657686696042031798L;
 	
-	private int timeout = 0;
 	private Hashtable<String, Consumer> consumers = null;
 	private Broker broker = null;
 
     public void init(ServletConfig config) throws ServletException
     {
-        System.out.println("init");
-        timeout = Integer.parseInt(config.getInitParameter("timeout"));
+        int timeout = Integer.parseInt(config.getInitParameter("timeout"));
         String[] topics = config.getInitParameter("topics").split(",");
         
-        
-        broker = new Broker(timeout);
+        broker = Broker.getInstance(timeout);
         for (String topic : topics) {
         	broker.addQueue(topic);
         }
@@ -36,7 +33,7 @@ public class brokerServlet extends HttpServlet {
         
         broker.addMessage("a", "test1");
         broker.addMessage("a", "test2");
-        broker.addMessage("a", "test3");
+        broker.addMessage("a", "test3");        
     }
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

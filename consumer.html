@@ -2,41 +2,50 @@
 <body>
  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
  <select id=topic>
-<option value="a">a</option>
-<option value="b">b</option>
-<option value="c">c</option>
 </select>
-    <button id=update>update</button><br>
+    <button id=topics>Get Topics</button><br><br>
+    <button id=update>Get message</button><br>
     <ul id=ulA>
     </ul>
     <script>
     $( document ).ready(function() {
-        console.log( "document loaded" );
-    });
- 
-    $( window ).load(function() {
-        console.log( "window loaded" );
+	    
+	    var session = "";
+	    $("#update").click(function(){
+	    	var topic = $("#topic").val();
+	    	$.ajax({
+			    type: 'GET',
+			    url: 'messages/'+topic,
+			    headers: {
+			        SESSION:session
+			    },
+			    success: function(res, status, xhr) {
+			    	session = xhr.getResponseHeader("SESSION");
+			    	if ('' != res) {
+					  	var li = $("<li>").text(res);
+					  	var list = $("#ulA").first();
+					  	list.prepend(li);
+				  	}
+				}
+			});
+	    });
+	    
+	    $("#topics").click(function(){
+	    	$.getJSON("topics", function( data ) {
+	    		var select = $('#topic');
+	    		select.empty();
+	    		
+	    	for(x in data) {
+	    		var option = $("<option>");
+	    		option.val(data[x]).text(data[x]);
+	    		select.append(option);
+	    	}
+			});
+	    });
+	    
+	    $("#topics").click();
     });
     
-    var session = "";
-    $("#update").click(function(){
-    	var topic = $("#topic").val();
-    	$.ajax({
-		    type: 'GET',
-		    url: 'broker/'+topic,
-		    headers: {
-		        SESSION:session
-		    },
-		    success: function(res, status, xhr) {
-		    	session = xhr.getResponseHeader("SESSION");
-		    	if ('' != res) {
-				  	var li = $("<li>").text(res);
-				  	var list = $("#ulA").first();
-				  	list.prepend(li);
-			  	}
-			}
-		});
-    });
     </script>
 </body>
 </html>
