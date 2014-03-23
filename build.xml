@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="hyperqueue" basedir="." default="create">
+<project name="hyperqueue" basedir="." default="buildall">
 
   <property name="warfile" value="broker"/>
 
-  <target name="create">
+  <target name="war">
     <war destfile="${warfile}.war" webxml="webapp/WEB-INF/web.xml" update="true">
       <classes dir="webapp/WEB-INF/classes"/>
       <fileset dir="webapp">
@@ -11,5 +11,15 @@
       </fileset>
     </war>
   </target>
+	<target name="client">
+		 <jar destfile="HQClient.jar" basedir="client/classes">
+		 	<manifest>
+                <attribute name="Main-Class" value="amartin.HyperQueue.client.HQClient"/>
+            </manifest>
+        </jar>
+		</target>
+	<target name="buildall" depends="war,client">
+		
+		</target>
 	
 </project>
