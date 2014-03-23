@@ -1,7 +1,7 @@
 package amartin.HyperQueue;
 
 import java.io.IOException;
-import java.util.Enumeration;
+import java.util.SortedSet;
 
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -35,11 +35,11 @@ public class topicServlet extends HttpServlet{
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		Enumeration<String> topics = broker.listQueue();
+		SortedSet<String> topics = broker.listQueue();
 		
 		JsonArrayBuilder json = Json.createArrayBuilder();
-		while (topics.hasMoreElements()) {
-			json.add(topics.nextElement());
+		for (String topic: topics) {
+			json.add(topic);
 		}
 		
 		JsonArray jasonObj = json.build();

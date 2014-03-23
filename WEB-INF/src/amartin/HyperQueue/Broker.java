@@ -1,18 +1,20 @@
 package amartin.HyperQueue;
 
-import java.util.Enumeration;
-import java.util.Hashtable;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Broker {
-	private Hashtable<String, MessageQueue> queues;
+	private ConcurrentHashMap<String, MessageQueue> queues;
 	private int timeout = 0;
 	private static Broker instance = null;
 	
 	public Broker(int timeout) {
 		this.timeout = timeout;
 		
-		queues = new Hashtable<String, MessageQueue>();
+		queues = new ConcurrentHashMap<String, MessageQueue>();
 	}
 	
 	public static Broker getInstance(int timeout) {
@@ -63,8 +65,9 @@ public class Broker {
 		return queue;
 	}
 	
-	public Enumeration<String> listQueue() {
-		Enumeration<String> keys = queues.keys();
-		return keys;
+	public SortedSet<String> listQueue() {
+		Set<String> keys =  queues.keySet();
+		SortedSet<String> sortedkeys = new TreeSet<String>(keys);
+		return sortedkeys;
 	}
 }
