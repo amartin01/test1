@@ -42,7 +42,7 @@ Topics broker address <input id=topicsBrokerAddress value='topics'>
 	    });
 
 	    $("#topics").click(function(){
-	    	$.getJSON($("#topicsBrokerAddress").val(), function( data ) {
+	    	$.getJSON($("#topicsBrokerAddress").val() + "?json=1", function( data ) {
 	    		var select = $('#topic');
 	    		select.empty();
 	    		

@@ -22,13 +22,8 @@ public class brokerServlet extends HttpServlet {
     public void init(ServletConfig config) throws ServletException
     {
         int timeout = Integer.parseInt(config.getInitParameter("timeout"));
-        String[] topics = config.getInitParameter("topics").split(",");
         
         broker = Broker.getInstance(timeout);
-        for (String topic : topics) {
-        	broker.addQueue(topic);
-        }
-        
         consumers = new Hashtable<String, Consumer>();      
     }
 

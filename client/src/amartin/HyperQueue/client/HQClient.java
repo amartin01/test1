@@ -48,7 +48,6 @@ public class HQClient {
 			return;
 		}
 		
-		conn.setRequestProperty("SESSION", "aaaaaaaaaaaaa");
 		try {
 			InputStream response = conn.getInputStream();
 	        

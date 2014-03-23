@@ -24,7 +24,12 @@ public class topicServlet extends HttpServlet{
     {
         int timeout = Integer.parseInt(config.getInitParameter("timeout"));
         
+        String[] topics = config.getInitParameter("topics").split(",");
+        
         broker = Broker.getInstance(timeout);
+        for (String topic : topics) {
+        	broker.addQueue(topic);
+        }
     }
     
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -37,12 +42,19 @@ public class topicServlet extends HttpServlet{
 	{
 		SortedSet<String> topics = broker.listQueue();
 		
-		JsonArrayBuilder json = Json.createArrayBuilder();
-		for (String topic: topics) {
-			json.add(topic);
+		String useJson = request.getParameter("json");
+		if (useJson != null) {
+			JsonArrayBuilder json = Json.createArrayBuilder();
+			for (String topic: topics) {
+				json.add(topic);
+			}
+			
+			JsonArray jasonObj = json.build();
+			response.getWriter().print(jasonObj);
+		} else {
+			for (String topic: topics) {
+				response.getWriter().println(topic);
+			}			
 		}
-		
-		JsonArray jasonObj = json.build();
-		response.getWriter().print(jasonObj);
 	}
 }

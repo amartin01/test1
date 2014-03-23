@@ -7,10 +7,6 @@
         	<param-name>timeout</param-name>
         	<param-value>5000</param-value>
         </init-param>
-        <init-param>
-        	<param-name>topics</param-name>
-        	<param-value>a,b,c</param-value>
-        </init-param>
     </servlet>
     <servlet>
         <servlet-name>topics</servlet-name>
@@ -18,6 +14,10 @@
         <init-param>
         	<param-name>timeout</param-name>
         	<param-value>5000</param-value>
+        </init-param>
+        <init-param>
+        	<param-name>topics</param-name>
+        	<param-value>a,b,c</param-value>
         </init-param>
     </servlet>
 
