@@ -2,6 +2,4 @@
 .settings
 .project
 .classpath
-# Package Files #
-*.war
-*.ear
+

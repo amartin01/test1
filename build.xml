@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="hyperqueue" basedir="." default="create">
+
+  <property name="warfile" value="broker"/>
+
+  <target name="create">
+    <war destfile="${warfile}.war" webxml="webapp/WEB-INF/web.xml" update="true">
+      <classes dir="webapp/WEB-INF/classes"/>
+      <fileset dir="webapp">
+        
+      </fileset>
+    </war>
+  </target>
+	
+</project>
