@@ -2,6 +2,10 @@
 <body>
  <script src="jquery-1.11.0.min.js"></script>
  <h1>HyperQueue consumer</h1>
+ <h3>Broker</h3>
+Message broker address <input id=messageBrokerAddress value='messages'><br>
+Topics broker address <input id=topicsBrokerAddress value='topics'>
+ 
  <h3>Topics</h3>
  Select topic: <select id=topic></select>
     <button id=topics>Refresh topics</button><br><br>
@@ -17,7 +21,7 @@
 	    	var topic = $("#topic").val();
 	    	$.ajax({
 			    type: 'GET',
-			    url: 'messages/'+topic,
+			    url: $("#messageBrokerAddress").val() + '/'+topic,
 			    headers: {
 			        SESSION:session
 			    },
@@ -38,7 +42,7 @@
 	    });
 
 	    $("#topics").click(function(){
-	    	$.getJSON("topics", function( data ) {
+	    	$.getJSON($("#topicsBrokerAddress").val(), function( data ) {
 	    		var select = $('#topic');
 	    		select.empty();
 	    		
@@ -54,6 +58,11 @@
 	    
 	    $("#topics").click();
     });
+    
+    var href = window.location.href;
+    var broker = href.substring(0,href.lastIndexOf("/"));
+    $('#messageBrokerAddress').val(broker + "/messages");
+    $('#topicsBrokerAddress').val(broker + "/topics");
     
     </script>
 </body>
